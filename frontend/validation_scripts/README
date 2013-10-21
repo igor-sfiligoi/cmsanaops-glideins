@@ -1,0 +1,7 @@
+This subdirectory contain the validation scripts for the glidein.
+It will be used by the glideins, passed on by the frontend (FE).
+
+A typical FE config line looks like this:
+      <file absfname="path_tp_dir/discover_CMSSW.sh" after_entry="True" after_group="False" const="True" executable="True" untar="False" wrapper="False">
+
+

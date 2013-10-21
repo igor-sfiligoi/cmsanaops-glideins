@@ -1,0 +1,14 @@
+In the directory there is a Makefile for the tarball, which contains two files, test_squid.py which is the unchanged script that the SAM tests used, and a wrapper script test_squid.sh that sets up the CMS environment and calls the python script.
+
+This is the xml for the frontend configuration:
+
+      <file absfname="<path>/test_squid/test_squid.tgz" after_entry="True" after_group="False" const="True" executable="False" untar="True" wrapper="False">
+         <untar_options absdir_outattr="CMS_TEST_SQUID" cond_attr="TRUE"/>
+      </file>
+      <file absfname="<path>/test_squid/test_squid.sh" after_entry="True" after_group="False" const="True" executable="True" untar="False" wrapper="False">
+         <untar_options cond_attr="TRUE"/>
+      </file>
+
+Main Author:
+James Letts <jletts@ucsd.edu>
+

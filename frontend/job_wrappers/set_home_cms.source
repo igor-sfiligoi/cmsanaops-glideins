@@ -1,0 +1,3 @@
+export OSG_WN_TMP=$PWD
+export _CONDOR_SCRATCH_DIR=$PWD
+export HOME=$PWD

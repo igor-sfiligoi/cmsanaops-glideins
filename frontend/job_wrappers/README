@@ -1,0 +1,7 @@
+This subdirectory contain the wrapper scripts for the user jobs.
+It will be used by the glideins, passed on by the frontend (FE).
+
+A typical FE config line looks like this:
+      <file absfname="path_to_dir/setjava.sh" after_entry="True" after_group="False" const="True" executable="False" untar="False" wrapper="True"/>
+
+
