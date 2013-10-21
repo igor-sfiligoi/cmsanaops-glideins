@@ -11,7 +11,7 @@
 #   This script installs and configures a Condor schedd instance for
 #     CMS AnaOps needs
 #   It can be run on its own, as it will retrieve the latest copy
-#     of the dependent files from CVS every time
+#     of the dependent files from git every time
 #
 # License:
 #   MIT
@@ -57,24 +57,24 @@ if [ $? -ne 0 ]; then
   exit 2
 fi
 
-CVSURL="http://cmscvs.cern.ch/cgi-bin/cmscvs.cgi/COMP/GLIDEINWMS/condor_config.tar.gz?view=tar"
-wget -nv $CVSURL -O cvs.tgz
+GITURL="https://github.com/igor-sfiligoi/cmsanaops-glideins/archive/master.zip"
+wget -nv $GITURL -O cms_git.zip
 if [ $? -ne 0 ]; then
-  echo "Failed to download the CVS tree: $CVSURL" 1>&2
+  echo "Failed to download the GIT tree: $GITURL" 1>&2
   cd $STARTDIR
   rm -fr $TMPDIR
   exit 3
 fi
 
-tar -xzf cvs.tgz
+unzip cms_git.zip
 if [ $? -ne 0 ]; then
-  echo "Failed to untar the CVS tree" 1>&2
+  echo "Failed to unzip the GIT tree" 1>&2
   cd $STARTDIR
   rm -fr $TMPDIR
   exit 3
 fi
 
-$PWD/condor_config/bin/anaops_schedd_install.donotrunbyhand.sh "$site"
+$PWD/cmsanaops-glideins-master/condor/bin/anaops_schedd_install.donotrunbyhand.sh "$site"
 rc=$?
 
 cd $STARTDIR
