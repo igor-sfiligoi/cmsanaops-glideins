@@ -57,7 +57,7 @@ if [ $? -ne 0 ]; then
   exit 2
 fi
 
-GITURL="https://github.com/igor-sfiligoi/cmsanaops-glideins/archive/master.zip"
+GITURL="https://github.com/igor-sfiligoi/cmsanaops-glideins/archive/deployment.zip"
 wget -nv $GITURL -O cms_git.zip
 if [ $? -ne 0 ]; then
   echo "Failed to download the GIT tree: $GITURL" 1>&2
@@ -74,7 +74,7 @@ if [ $? -ne 0 ]; then
   exit 3
 fi
 
-$PWD/cmsanaops-glideins-master/condor/bin/anaops_schedd_install.donotrunbyhand.sh "$site"
+$PWD/cmsanaops-glideins-deployment/condor/bin/anaops_schedd_install.donotrunbyhand.sh "$site"
 rc=$?
 
 cd $STARTDIR
