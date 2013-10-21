@@ -1,0 +1,10 @@
+#
+# List of condor config files needed by the schedd
+#  for CMS purposes
+#
+# CERN generic part
+#
+
+include ../generic/cms_schedd_configs.flist
+81_cms_schedd_cern.config
+

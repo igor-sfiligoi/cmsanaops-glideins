@@ -1,0 +1,92 @@
+Install instructions for a glidein-compatible Condor schedd
+===========================================================
+
+This document explains how to install a glidein-compatible
+submit node to be used by the CMS AnaOps Instance at UCSD
+(i.e. the schedd node).
+It will work for nodes at UNL as well.
+
+It covers the installation of Condor only.
+It does not cover other services, like CRAB.
+
+What we will get
+----------------
+We will create a full condor install.
+
+We will create symbolic links from
+/etc/condor
+so we can access all config files from there.
+
+The actual config is split in multiple files, most of them living in
+/etc/condor/config.d
+Most of the files never need to be changed. So you can 
+copy over the (partial) config files from central repositories at any time, 
+without loosing anything.
+If you want to tweak your Condor config, please do it in
+/etc/condor/config.d/99_local_tweaks.config
+
+Assumtions
+----------
+0) You have extracted the current CVS tree from CVS:
+     https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookComputingConcepts#Anonymous_CVS_access_pserver
+     cvs -d ":pserver:anonymous@cmscvs.cern.ch:/local/reps/CMSSW" co COMP/GLIDEINWMS/condor_config
+1) We are installing Condor as root, from the tarballs.
+   Download them from, if needed:
+   http://research.cs.wisc.edu/htcondor/downloads/
+   Use the latest 7.8.X tarball for the schedd, and 7.9.X for condor_history.
+   You have already unpacked the tarballs.  
+2) The Grid security pieces must be already in place in
+   /etc/grid-security
+   Get them from either the OSG or gLite installations.
+   Having the other standard Grid binaries (e.g. voms-proxy-info)
+   in the path is recommended, but not strictly necessary.
+3) The system has a dummy account called
+   condor
+   already configured.
+   (no-one should be able to login into it)
+4) You have the glideinWMS software available locally.
+   Please use the v2_7 or later variant.
+   http://tinyurl.com/glideinWMS/download.html
+5) We will use the following environment variables;
+    CMSDIR         - Where is this CVS tree is living
+    CONDORTARDIR   - Where you untared the v7.8.X Condor tarball
+    CONDORTARDIRv9 - Where you untared the v7.9.X Condor tarball
+    GWMSDIR        - Where you extracted the glideinWMS tree
+    INSTDIR        - Where the condor installation will live after the installation
+   set them to whatever you like, or just plainly replace their content in-line.
+
+Installation steps
+------------------
+1) Run the installer script
+  $CVSDIR/bin/install_condor.sh schedd $INSTDIR $CONDORTARDIR $GWMSDIR anaops_ucsd 
+2) Patch condor_history with
+  $CVSDIR/crab2_rcondor/cms_schedd_patch.sh $CONDORTARDIRv9 
+
+After the installation
+----------------------
+Remember to authorize the schedd in the Collector.
+
+You will likely need to install the GRATIA probe.
+
+You are now ready to start Condor
+# To start condor, just use
+/sbin/service condor start
+# You may also want to tell Condor to start on reboot
+/sbin/chkconfig condor on
+
+Binary upgrade steps
+--------------------
+If and when you need to upgrade the Condor binaries,
+   use the glideinWMS helper script
+  $GWMS/install/glidecondor_upgrade <newtarball>
+
+followed by a new invocation of
+  $CVSDIR/crab2_rcondor/cms_schedd_patch.sh $CONDORTARDIRv9 
+
+Config upgrade steps
+--------------------
+Anytime you need to upgrade the config files from CVS, run
+  $CVSDIR/bin/config_condor.sh schedd $GWMSDIR anaops_ucsd 
+ 
+
+

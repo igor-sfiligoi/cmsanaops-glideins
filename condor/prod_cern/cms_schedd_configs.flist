@@ -1,0 +1,9 @@
+#
+# List of condor config files needed by the schedd
+#  for CMS purposes
+#
+# proc_cern part
+#
+
+include ../generic_cern/cms_schedd_configs.flist
+80_cms_schedd_prod_cern.config

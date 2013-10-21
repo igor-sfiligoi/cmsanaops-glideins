@@ -1,0 +1,16 @@
+Installtion instructions
+========================
+
+These directory structure provides the needed files
+to get a glidein-compatible Condor node up and running.
+
+Since CMS runs a varied set of Condor instances, 
+there we provide different instructions for different instances:
+* anaops_ucsd/INSTALL.schedd.txt   - AnaOps@UCSD schedd installation
+* prod_cern/INSTALL.schedd.txt     - Production@CERN schedd installation
+* crab2_rcondor/INSTALL.schedd.txt - CRAB/rcondor schedd installtion
+                                     (builds on top of one of the above) 
+
+The other directories provide only partial information
+and you probably don't want to start from those.
+

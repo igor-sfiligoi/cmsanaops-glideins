@@ -1,0 +1,9 @@
+#
+# List of condor mapfiles needed by the schedd
+#  for CMS purposes
+#
+# anaops_cern part
+#
+
+include ../anaops_ucsd/cms_schedd_mapfiles.flist
+

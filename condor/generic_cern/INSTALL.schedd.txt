@@ -1,0 +1,8 @@
+Install instructions for a glidein-compatible Condor schedd
+===========================================================
+
+This directory does not contain enough info for a full install.
+
+See the other directories.
+
+

@@ -1,0 +1,5 @@
+AnaOps@UCSD-specific Condor config files
+
+*.config files go in the config.d dir
+*.mapfile files must be prepended on the condor_mapfile
+

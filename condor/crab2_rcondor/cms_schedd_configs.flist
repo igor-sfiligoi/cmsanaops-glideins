@@ -1,0 +1,8 @@
+#
+# List of condor config files needed by the schedd
+#  for CMS purposes
+#
+# CRAB rcodnor part
+#
+
+81_cms_crab2_rcondor_schedd_jobattrs.config

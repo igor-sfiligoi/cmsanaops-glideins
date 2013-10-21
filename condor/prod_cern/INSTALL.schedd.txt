@@ -1,0 +1,75 @@
+Install instructions for a glidein-compatible Condor schedd
+===========================================================
+
+This document explains how to install a glidein-compatible
+submit node to be used by the CMS Production Instance at CERN
+(i.e. the schedd node).
+
+It covers the installation of Condor only.
+It does not cover other services, like WMAgent.
+
+What we will get
+----------------
+We will create a full condor install under the cmst1 user.
+
+The actual config is split in multiple files, most of them living in
+$INSTDIR/condor_local/config
+Most of the files never need to be changed. So you can 
+copy over the (partial) config files from central repositories at any time, 
+without loosing anything.
+If you want to tweak your Condor config, please do it in
+$INSTDIR/condor_local/99_local_tweaks.config
+
+Assumtions
+----------
+0) You have extracted the current CVS tree from CVS:
+     https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBookComputingConcepts#Anonymous_CVS_access_pserver
+     cvs -d ":pserver:anonymous@cmscvs.cern.ch:/local/reps/CMSSW" co COMP/GLIDEINWMS/condor_config
+1) We are installing Condor as user cmst1, from the tarball.
+   Download it from, if needed:
+   http://research.cs.wisc.edu/htcondor/downloads/
+   Use the latest 7.8.X tarball.
+   You have already unpacked the tarball.  
+2) The Grid CA public keys are avaialble at
+    /afs/cern.ch/project/gd/LCG-share/certificates
+3) The host certificates are avaialble in
+    /data/certs
+4) You have the glideinWMS software available locally.
+   Please use the v2_7 or later variant.
+   http://tinyurl.com/glideinWMS/download.html
+5) We will use the following environment variables;
+    CVSDIR         - Where is this CVS tree is living
+    CONDORTARDIR   - Where you untared the Condor tarball
+    GWMSDIR        - Where you extracted the glideinWMS tree
+    INSTDIR        - Where the condor installation will live after the installation
+   set them to whatever you like, or just plainly replace their content in-line.
+
+Installation steps
+------------------
+1) Run the installer script
+  $CVSDIR/bin/install_condor.sh -nolsb schedd $INSTDIR $CONDORTARDIR $GWMSDIR prod_cern cmst1
+
+2) Since cmst1 is a service account, it has no $HOME
+   so you will ahve to run 
+      source $INSTDIR/condor.sh
+   every time you log into it.
+
+After the installation
+----------------------
+Remember to authorize the schedd in the Collector.
+
+You are now ready to start Condor with
+$INSTDIR/etc/init.d/condor start
+
+Binary upgrade steps
+--------------------
+If and when you need to upgrade the Condor binaries,
+   use the glideinWMS helper script
+  $GWMS/install/glidecondor_upgrade <newtarball>
+
+Config upgrade steps
+--------------------
+Anytime you need to upgrade the config files from CVS, run
+  $CVSDIR/bin/config_condor.sh schedd $GWMSDIR proc_cern
+ 
+

@@ -1,0 +1,11 @@
+These configuration files are to be used in a 
+config.d
+Condor config scenario.
+
+GlideinWMS now provides the base files in the
+glideinWMS/install/template
+directory (and as part of the RPM installs)
+
+These files should be used together with the
+glideinWMS provided ones.
+

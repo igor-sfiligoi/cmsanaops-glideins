@@ -1,0 +1,9 @@
+#
+# List of condor mapfiles needed by the schedd
+#  for CMS purposes
+#
+# proc_cern part
+#
+
+80_cms_schedd_prod_cern.mapfile
+

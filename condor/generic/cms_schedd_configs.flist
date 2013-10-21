@@ -1,0 +1,10 @@
+#
+# List of condor config files needed by the schedd
+#  for CMS purposes
+#
+# Generic part
+#
+
+80_cms_schedd_config.config
+80_cms_schedd_tunning.config
+80_cms_schedd_logs.config
