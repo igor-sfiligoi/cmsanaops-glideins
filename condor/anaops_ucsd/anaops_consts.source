@@ -1,12 +1,13 @@
 TARURL=http://glidein-frontend.t2.ucsd.edu:8319/anaops_tarballs
 GWMSTAR=glideinWMS_v2_7.tgz
 
-CONDORTAR5=condor-7.8.8-x86_rhap_5.8-stripped.tar.gz
-CONDORTAR6=condor-7.8.8-x86_rhap_6.3-stripped.tar.gz
+CONDORTAR5=condor_8.0.1_latency_sl5.tgz
+CONDORTAR6=condor_8.0.1_latency_sl6.tgz
 
 # condor for patching
-PCONDORTAR5=condor-7.9.5-x86_RedHat5-stripped.tar.gz
-PCONDORTAR6=condor-7.9.5-x86_RedHat6-stripped.tar.gz
+# currently not supported
+PCONDORTAR5=fake
+PCONDORTAR6=fake
 
 RHELVERSION=`lsb_release -r |awk '{split($2,a,".");; print a[1]}'`
 
