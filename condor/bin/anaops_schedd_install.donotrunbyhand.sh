@@ -111,7 +111,7 @@ if [ $? -ne 0 ]; then
 fi
 
 
-tar -xzf $GWMSTAR && tar -xzf $CONDORTAR && tar -xzf $PCONDORTAR
+tar -xzf $GWMSTAR && tar -xzf $CONDORTAR
 if [ $? -ne 0 ]; then
   echo "Failed to extract tarballs" 1>&2
   fail 2
