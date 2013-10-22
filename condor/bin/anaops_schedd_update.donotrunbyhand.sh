@@ -123,21 +123,30 @@ fi
 GWMSDIR=$PWD/glideinwms
 
 if [ $update_bin -eq 1 ]; then
-    rm -f $CONDORTAR $PCONDORTAR
-    wget -nv $TARURL/$CONDORTAR && wget -nv $TARURL/$PCONDORTAR
+    rm -f $CONDORTAR
+    wget -nv $TARURL/$CONDORTAR
     if [ $? -ne 0 ]; then
-	echo "Failed to download condor tarballs from $TARURL" 1>&2
+	echo "Failed to download condor tarball from $TARURL" 1>&2
 	exit 2
     fi
-
-    tar -xzf $PCONDORTAR
-    if [ $? -ne 0 ]; then
-	echo "Failed to extract condor tarball" 1>&2
-	exit 2
-    fi
-
     CONDORDIR=$PWD/`echo $CONDORTAR |awk '{split($0,a,"\\\\.t"); print a[1]}'`
-    PCONDORDIR=$PWD/`echo $PCONDORTAR |awk '{split($0,a,"\\\\.t"); print a[1]}'`
+
+    if [ "$PCONDORTAR" != "fake" ]; then
+	rm -f $PCONDORTAR
+	wget -nv $TARURL/$PCONDORTAR
+	if [ $? -ne 0 ]; then
+	    echo "Failed to download condor patch tarball from $TARURL" 1>&2
+	    exit 2
+	fi
+
+	tar -xzf $PCONDORTAR
+	if [ $? -ne 0 ]; then
+	    echo "Failed to extract condor patch tarball" 1>&2
+	    exit 2
+	fi
+
+	PCONDORDIR=$PWD/`echo $PCONDORTAR |awk '{split($0,a,"\\\\.t"); print a[1]}'`
+    fi
 
     # This will upgrade the binaries
     $GWMSDIR/install/glidecondor_upgrade $CONDORTAR
@@ -146,11 +155,13 @@ if [ $update_bin -eq 1 ]; then
 	exit 2
     fi
     
-    # but now we have to re-patch, too
-    $CMSBIN/../crab2_rcondor/cms_schedd_patch.sh $PCONDORDIR
-    if [ $? -ne 0 ]; then
-        # the command errors should be self reporting
-	exit 3
+    if [ "$PCONDORTAR" != "fake" ]; then 
+        # but now we have to re-patch, too
+	$CMSBIN/../crab2_rcondor/cms_schedd_patch.sh $PCONDORDIR
+	if [ $? -ne 0 ]; then
+            # the command errors should be self reporting
+	    exit 3
+	fi
     fi
 fi
  

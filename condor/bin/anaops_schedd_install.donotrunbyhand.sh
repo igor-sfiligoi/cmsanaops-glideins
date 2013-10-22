@@ -103,14 +103,15 @@ case "$site" in
      ;;
 esac
 
-rm -f $GWMSTAR $CONDORTAR $PCONDORTAR
-wget -nv $TARURL/$GWMSTAR && wget -nv $TARURL/$CONDORTAR && wget -nv $TARURL/$PCONDORTAR
+rm -f $GWMSTAR $CONDORTAR
+wget -nv $TARURL/$GWMSTAR && wget -nv $TARURL/$CONDORTAR
 if [ $? -ne 0 ]; then
   echo "Failed to download tarballs from $TARURL" 1>&2
   fail 2
 fi
 
-tar -xzf $GWMSTAR && tar -xzf $CONDORTAR && tar -xzf $PCONDORTAR
+
+tar -xzf $GWMSTAR && tar -xzf $CONDORTAR
 if [ $? -ne 0 ]; then
   echo "Failed to extract tarballs" 1>&2
   fail 2
@@ -118,7 +119,24 @@ fi
 
 GWMSDIR=$PWD/glideinwms
 CONDORDIR=$PWD/`echo $CONDORTAR |awk '{split($0,a,"\\\\.t"); print a[1]}'`
-PCONDORDIR=$PWD/`echo $PCONDORTAR |awk '{split($0,a,"\\\\.t"); print a[1]}'`
+
+if [ "$PCONDORTAR" != "fake" ]; then 
+    rm -f $PCONDORTAR
+    wget -nv $TARURL/$PCONDORTAR
+    if [ $? -ne 0 ]; then
+	echo "Failed to download patch tarbals from $TARURL" 1>&2
+	fail 2
+    fi
+
+
+    tar -xzf $PCONDORTAR
+    if [ $? -ne 0 ]; then
+	echo "Failed to extract patch tarball" 1>&2
+	fail 2
+    fi
+    PCONDORDIR=$PWD/`echo $PCONDORTAR |awk '{split($0,a,"\\\\.t"); print a[1]}'`
+fi
+
 
 $CMSBIN/install_condor.sh schedd $INSTDIR $CONDORDIR $GWMSDIR $ANATYPE $CONDORUSER
 if [ $? -ne 0 ]; then
@@ -128,10 +146,12 @@ fi
 
 echo -e "cmstype = $ANATYPE\ncondortype = schedd" >  $INSTDIR/condor_local/cms_install.conf
 
-$CMSBIN/../crab2_rcondor/cms_schedd_patch.sh $PCONDORDIR
-if [ $? -ne 0 ]; then
+if [ "$PCONDORTAR" != "fake" ]; then 
+    $CMSBIN/../crab2_rcondor/cms_schedd_patch.sh $PCONDORDIR
+    if [ $? -ne 0 ]; then
   # the command errors should be self reporting
-  fail 3
+	fail 3
+    fi
 fi
 
 echo "Condor installation and configuration successfully completed"
