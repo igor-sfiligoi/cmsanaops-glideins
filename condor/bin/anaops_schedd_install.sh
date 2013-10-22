@@ -66,7 +66,7 @@ if [ $? -ne 0 ]; then
   exit 3
 fi
 
-unzip cms_git.zip
+unzip -q cms_git.zip
 if [ $? -ne 0 ]; then
   echo "Failed to unzip the GIT tree" 1>&2
   cd $STARTDIR
