@@ -1,2 +1,3 @@
 GSI "^\/DC\=org\/DC\=doegrids\/OU\=Services\/CN\=glidein\-collector\.t2\.ucsd\.edu$" collector
+GSI "^\/DC\=org\/DC\=doegrids\/OU\=Services\/CN\=glidein\-collector\-2\.t2\.ucsd\.edu$" collector2
 GSI "^\/DC\=org\/DC\=doegrids\/OU\=Services\/CN\=glidein\-frontend\.t2\.ucsd\.edu$" frontend
