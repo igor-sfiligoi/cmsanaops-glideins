@@ -5,7 +5,7 @@
 #  install_condor.sh
 # 
 # Arguments:
-#   install_condor.sh [-nolsb] <condor type> <target instdir> <condor dir> <gwms dir> <type> [<condor user> [<CVS dir>]]
+#   install_condor.sh [-nolsb] <condor type> <target instdir> <condor dir> <gwms dir> <type> [<condor user> [<CMS dir>]]
 #
 # Description:
 #   This script installs and configures a COndor Schedd for CMS use
@@ -17,7 +17,7 @@
 
 function usage {
   echo "Usage:" 1>&2
-  echo " $0 [-nolsb] <condor type> <target instdir> <condor dir> <gwms dir> <type> [<condor user> [<CVS dir>]]" 1>&2
+  echo " $0 [-nolsb] <condor type> <target instdir> <condor dir> <gwms dir> <type> [<condor user> [<CMS dir>]]" 1>&2
   echo  1>&2
 }
 
