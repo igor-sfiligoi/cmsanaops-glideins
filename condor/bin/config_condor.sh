@@ -5,7 +5,7 @@
 #  config_schedd.sh
 # 
 # Arguments:
-#   config_schedd_.sh <condor type> <gwms dir> <type> [<CVS dir>]
+#   config_schedd_.sh <condor type> <gwms dir> <type> [<CMS dir>]
 #
 # Description:
 #   This script (re-)creates the config files for a CMS Schedd installation
@@ -17,7 +17,7 @@
 
 if [ $# -lt 3 ]; then
   echo "Usage:" 1>&2
-  echo " $0 <condor type> <gwms dir> <type> [<CVS dir>]" 1>&2
+  echo " $0 <condor type> <gwms dir> <type> [<CMS dir>]" 1>&2
   echo  1>&2
   echo "Only $# argument(s) provided" 1>&2
   exit 1
