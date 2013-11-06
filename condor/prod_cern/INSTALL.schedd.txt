@@ -1,6 +1,9 @@
 Install instructions for a glidein-compatible Condor schedd
 ===========================================================
 
+WARNING: This document is obsolete. It likely does not work anymore.
+
+
 This document explains how to install a glidein-compatible
 submit node to be used by the CMS Production Instance at CERN
 (i.e. the schedd node).
