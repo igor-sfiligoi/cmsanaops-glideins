@@ -1,0 +1,8 @@
+#
+# List of condor config files needed by the schedd
+#  for CMS purposes
+#
+# CRAB3 part
+#
+
+81_cms_schedd_crab3.config

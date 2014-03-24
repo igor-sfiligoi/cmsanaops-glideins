@@ -1,0 +1,10 @@
+Install instructions for a glidein-compatible Condor schedd
+===========================================================
+
+This directory does not contain enough information to install anything.
+
+See either
+ ../anaops_ucsd/INSTALL.schedd.txt
+or
+ ../anaops_cern/INSTALL.schedd.txt
+instead.
