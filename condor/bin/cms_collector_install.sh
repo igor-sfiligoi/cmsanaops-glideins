@@ -38,8 +38,8 @@ fi
 
 site=$1
 
-if [ "`id -un`" != "root" ]; then
-  echo "You must be root to run this command" 1>&2
+if [ "`id -un`" == "root" ]; then
+  echo "You must not be root to run this command" 1>&2
   echo "Aborting" 1>&2
   exit 2
 fi
