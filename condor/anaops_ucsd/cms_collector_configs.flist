@@ -1,0 +1,10 @@
+#
+# List of condor config files needed by the schedd
+#  for CMS purposes
+#
+# anaops_ucsd part
+#
+
+include ../generic/cms_collector_configs.flist
+90_cms_negotiator_policy_ucsd.config
+92_cms_ucsd_ha.config
