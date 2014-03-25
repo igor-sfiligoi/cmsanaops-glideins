@@ -1,5 +1,5 @@
-TARURL=http://glidein-frontend.t2.ucsd.edu:8319/anaops_tarballs
-GWMSTAR=glideinWMS_v2_7.tgz
+TARURL=http://glidein-collector-2.t2.ucsd.edu/anaops_tarballs
+GWMSTAR=glideinWMS_v2_7_2.tgz
 
 CONDORTAR5=condor-8.0.1_latency_sl5.tgz
 CONDORTAR6=condor-8.0.1_latency_sl6.tgz
