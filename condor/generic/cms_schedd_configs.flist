@@ -8,3 +8,4 @@
 80_cms_schedd_config.config
 80_cms_schedd_tunning.config
 80_cms_schedd_logs.config
+10_ha_collectors.config
