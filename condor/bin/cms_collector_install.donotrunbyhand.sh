@@ -131,7 +131,7 @@ if [ "$PCONDORTAR" != "fake" ]; then
 fi
 
 
-$CMSBIN/install_condor.sh collector $INSTDIR $CONDORDIR $GWMSDIR $ANATYPE $CONDORUSER
+$CMSBIN/install_condor.sh -nolsb collector $INSTDIR $CONDORDIR $GWMSDIR $ANATYPE $CONDORUSER
 if [ $? -ne 0 ]; then
   # the command errors should be self reporting
   fail 3
