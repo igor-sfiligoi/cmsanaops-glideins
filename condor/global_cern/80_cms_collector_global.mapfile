@@ -1,0 +1,5 @@
+GSI "^\/DC\=ch\/DC\=cern\/OU\=computers\/CN\=frontend01\/vocms097\.cern\.ch$" collector1
+GSI "^\/DC\=ch\/DC\=cern\/OU\=computers\/CN\=frontend01\/vocms099\.cern\.ch$" collector2
+GSI "^\/DC\=ch\/DC\=cern\/OU\=computers\/CN\=frontend01\/vocms0167\.cern\.ch$" frontend
+GSI "^\/DC\=ch\/DC\=cern\/OU\=computers\/CN\=cmspilot01\/vocms0167\.cern\.ch$" newpilot01
+GSI "^\/DC\=ch\/DC\=cern\/OU\=computers\/CN\=p01001456783585\.cern\.ch$" schedd96cern
