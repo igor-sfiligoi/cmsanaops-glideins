@@ -34,7 +34,7 @@ fi
 
 if [[ "$CTYPE" != "schedd" && "$CTYPE" != "collector" ]]; then
   echo "Invalid condor type: $CTYPE" 1>&2
-  echo "Only schedd (and soon collector) supported right now" 1>&2
+  echo "Only schedd and  collector supported right now" 1>&2
   exit 1
 fi
 
@@ -116,6 +116,8 @@ echo
 # now copy the base gwms templates in the config file
 if [[ "$CTYPE" == "schedd" ]]; then
   gtfiles="00_gwms_general.config 02_gwms_schedds.config 03_gwms_local.config"
+elif [[ "$CTYPE" == "collector" ]]; then
+  gtfiles="00_gwms_general.config 01_gwms_collectors.config 03_gwms_local.config 11_gwms_secondary_collectors.config"
 else
   echo "this condor type is not yet supported: $CTYPE" 1>&2
   exit 1

@@ -8,11 +8,11 @@
 #   install_condor.sh [-nolsb] <condor type> <target instdir> <condor dir> <gwms dir> <type> [<condor user> [<CMS dir>]]
 #
 # Description:
-#   This script installs and configures a COndor Schedd for CMS use
+#   This script installs and configures a Condor instance for CMS use
 #
 # License:
 #   MIT
-#   Copyright (c) 2013 Igor Sfiligoi <isfiligoi@ucsd.edu>
+#   Copyright (c) 2014 Igor Sfiligoi <isfiligoi@ucsd.edu>
 #
 
 function usage {
@@ -72,7 +72,7 @@ fi
 
 if [[ "$CTYPE" != "schedd" && "$CTYPE" != "collector" ]]; then
   echo "Invalid condor type: $CTYPE" 1>&2
-  echo "Only schedd (and soon collector) supported right now" 1>&2
+  echo "Only schedd and soon collector supported right now" 1>&2
   exit 1
 fi
 
@@ -135,10 +135,18 @@ STARTDIR=$PWD
 echo  "Installing condor"
 echo
 
-cd $CONDORDIR && \
-./condor_install --prefix=$INSTDIR --local-dir=$INSTDIR/condor_local $OWNERSTR \
---type=submit  --central-manager=fake
-rc=$?
+if [[ "$CTYPE" == "schedd" ]]; then
+  cd $CONDORDIR && \
+  ./condor_install --prefix=$INSTDIR --local-dir=$INSTDIR/condor_local $OWNERSTR \
+  --type=submit  --central-manager=fake
+  rc=$?
+else
+  cd $CONDORDIR && \
+  ./condor_install --prefix=$INSTDIR --local-dir=$INSTDIR/condor_local $OWNERSTR \
+  --type=manager
+  rc=$?
+fi
+
 if [ $rc -ne 0 ]; then
   echo "Condor installation failed" 1>&2
   echo "You may need to wipe $INSTDIR" 1>&2
@@ -175,12 +183,18 @@ if [ "$uselsb" -eq 1 ]; then
   cd $STARTDIR
   source /etc/profile.d/condor.sh
 else
+  if [ "$myid" != "root" ]; then
+      nlsbcfg=13_cms_userspace.config
+  else
+      nlsbcfg=09_gwms_local_nolsb.config
+  fi
+
   echo "Patching configs to allow for non-LSB setup"
   echo
-  cp $CMSDIR/generic/09_gwms_local_nolsb.config $cdir/
+  cp $CMSDIR/generic/$nlsbcfg $cdir/
   rc=$?
   if [ $rc -ne 0 ]; then
-    echo "Failed to copy $CMSDIR/generic/09_gwms_local_nolsb.config into $cdir" 1>&2
+    echo "Failed to copy $CMSDIR/generic/$nlsbcfg into $cdir" 1>&2
     echo "You may need to wipe $INSTDIR" 1>&2
     exit 1
   fi
