@@ -1,0 +1,12 @@
+#
+# List of condor config files needed by the collector
+#  for CMS purposes
+#
+# Generic part
+#
+
+10_had.config
+80_cms_collector_config.config
+80_cms_collector_logs.config
+80_cms_collector_tunning.config
+10_ha_collectors.config
