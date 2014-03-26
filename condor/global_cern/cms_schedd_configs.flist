@@ -5,7 +5,7 @@
 # anaops_ucsd part
 #
 
-include ../generic/cms_schedd_configs.flist
+include ../generic_cern/cms_schedd_configs.flist
 ../anaops_ucsd/80_cms_schedd_anaops_ucsd.config
 include ../crab2_rcondor/cms_schedd_configs.flist
 include ../crab3/cms_schedd_configs.flist
