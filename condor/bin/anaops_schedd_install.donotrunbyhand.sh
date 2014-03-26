@@ -97,6 +97,11 @@ case "$site" in
     CONDORUSER=_condor
     INSTDIR=/data/srv/glidecondor
     ;;
+  CERNGlobal)
+    ANATYPE=global_cern
+    CONDORUSER=_condor
+    INSTDIR=/data/srv/glidecondor
+    ;;
   *)
      echo "Site not supported: $site" 1>&2
      fail 2
