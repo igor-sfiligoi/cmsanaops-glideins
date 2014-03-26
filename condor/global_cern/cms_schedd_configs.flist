@@ -6,7 +6,7 @@
 #
 
 include ../generic/cms_schedd_configs.flist
-include ../anaops_ucsd/80_cms_schedd_anaops_ucsd.config
+./anaops_ucsd/80_cms_schedd_anaops_ucsd.config
 include ../crab2_rcondor/cms_schedd_configs.flist
 include ../crab3/cms_schedd_configs.flist
 92_cms_global_ha.config
