@@ -6,5 +6,6 @@
 #
 
 include ../generic/cms_collector_configs.flist
+80_cms_collector_global.config
 90_cms_negotiator_policy_global.config
 92_cms_global_ha.config
